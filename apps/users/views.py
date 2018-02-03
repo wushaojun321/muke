@@ -55,9 +55,12 @@ class LoginView(View):
     '''
 
     def get(self, request):
+        banners = Banner.objects.all()
         next_url = request.GET.get('next', '')
         print next_url
-        return render(request, 'login.html', {'next_url': next_url})
+        return render(request, 'login.html', {
+            'next_url': next_url,
+            'banners': banners})
 
     def post(self, request):
 
@@ -95,8 +98,12 @@ class RegisterView(View):
     '''
 
     def get(self, request):
+        banners = Banner.objects.all()
         register_form = RegisterForm()
-        return render(request, 'register.html', {'register_form': register_form})
+        return render(request, 'register.html', {
+            'register_form': register_form,
+            'banners': banners,
+            })
 
     def post(self, request):
         register_form = RegisterForm(request.POST)
